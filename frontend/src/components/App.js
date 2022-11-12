@@ -15,7 +15,8 @@ import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
 import * as auth from '../utils/auth';
-import '../index.css';
+import '../index.css'; 
+require('dotenv').config();
 
 function App() {
     const history = useHistory();
