@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/NotFoundError');
-
+const cors = require('./middlewares/cors');
 const { login, createUser } = require('./controllers/users');
 const { loginValid, createUserValid } = require('./middlewares/validator');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -17,9 +18,10 @@ const { PORT = 3000 } = process.env;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(cors);
 
 app.listen(PORT, () => {
-  // Если всё работает, консоль покажет, какой порт приложение слушает
   console.log(`App listening on port ${PORT}`);
 });
 
