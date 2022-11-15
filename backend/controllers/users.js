@@ -98,7 +98,15 @@ module.exports.login = (req, res, next) => {
         sameSite: 'none',
         secure: true,
       });
-      res.send({ token });
+      res.send({
+        data: {
+          name: user.name,
+          avatar: user.avatar,
+          about: user.about,
+          email: user.email,
+          _id: user._id,
+        },
+      });
     })
     .catch(next);
 };

@@ -26,9 +26,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors);
 
-app.get('/checkCookie', checkCookie);
-app.get('/signout', logout);
-
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
@@ -37,16 +34,18 @@ app.use(requestLogger); // подключаем логгер запросов
 
 app.post('/signin', loginValid, login);
 app.post('/signup', createUserValid, createUser);
+app.get('/checkCookie', checkCookie);
+app.get('/signout', logout);
 
 app.use(auth);
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/cards'));
 
-app.use(errorLogger); // подключаем логгер ошибок
-
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена.'));
 });
+
+app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors());
 app.use(error);
