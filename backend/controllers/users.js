@@ -103,6 +103,14 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.logout = (req, res) => {
+  res.clearCookie('token', {
+    sameSite: 'none',
+    secure: true,
+  });
+  res.send({ message: 'токен успешно удален из cookies' });
+};
+
 module.exports.getUserMe = (req, res, next) => {
   const { _id } = req.user;
   User
@@ -114,4 +122,11 @@ module.exports.getUserMe = (req, res, next) => {
       res.send(user);
     })
     .catch(next);
+};
+
+module.exports.checkCookie = (req, res) => {
+  if (!req.cookies.token) {
+    return res.send('false');
+  }
+  return res.send('true');
 };

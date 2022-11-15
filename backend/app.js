@@ -8,7 +8,12 @@ const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/NotFoundError');
 const cors = require('./middlewares/cors');
-const { login, createUser } = require('./controllers/users');
+const {
+  login,
+  createUser,
+  checkCookie,
+  logout,
+} = require('./controllers/users');
 const { loginValid, createUserValid } = require('./middlewares/validator');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const error = require('./middlewares/error');
@@ -20,6 +25,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors);
+
+app.get('/checkCookie', checkCookie);
+app.get('/signout', logout);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
