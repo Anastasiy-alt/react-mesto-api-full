@@ -1,7 +1,7 @@
 const allowedCors = [
   'https://mesto.pilot.nomoredomains.icu',
-  'http://api.mesto.pilot.nomoredomains.icu',
-  'http://localhost:3000',
+  'https://api.mesto.pilot.nomoredomains.icu',
+  'https://localhost:3000',
 ];
 
 module.exports = (req, res, next) => {
