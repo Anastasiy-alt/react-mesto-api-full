@@ -1,7 +1,7 @@
 class Api {
-    constructor(options) {
-        this._baseUrl = options.baseUrl;
-        this._headers = options.headers;
+    constructor({ baseUrl, headers }) {
+        this._baseUrl = baseUrl;
+        this._headers = headers;
     }
 
     _check(res) {
@@ -110,18 +110,18 @@ class Api {
 
     changeLikeCardStatus(cardId, isLiked) {
         return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-          method: `${!isLiked ? 'DELETE' : 'PUT'}`,
-          headers: this._headers
+            credentials: 'include',
+            method: `${!isLiked ? 'DELETE' : 'PUT'}`,
+            headers: this._headers
         })
-          .then(res => this._check(res));
-      }
+            .then(res => this._check(res));
+    }
 
 }
 
 const api = new Api({
     baseUrl: 'https://api.mesto.pilot.nomoredomains.icu',
     headers: {
-        // authorization: '4ab555e1-39a0-48e6-8593-6e8a4a84e28f',
         'Content-Type': 'application/json'
     }
 });
