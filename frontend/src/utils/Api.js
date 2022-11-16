@@ -119,7 +119,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'http://api.mesto.pilot.nomoredomains.icu',
+    baseUrl: 'https://api.mesto.pilot.nomoredomains.icu',
     headers: {
         // authorization: '4ab555e1-39a0-48e6-8593-6e8a4a84e28f',
         'Content-Type': 'application/json'
