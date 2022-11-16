@@ -15,7 +15,8 @@ import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
 import * as auth from '../utils/auth';
-import '../index.css'; 
+import '../index.css';
+import checkToken from '../utils/auth';
 require('dotenv').config();
 
 function App() {
@@ -34,27 +35,33 @@ function App() {
     const [selectDelete, setSelectDelete] = useState(false);
     const [deleteCard, setDeleteCard] = useState('');
 
- 
+
 
     const tokenCheck = () => {
         const jwt = localStorage.getItem('jwt');
         if (jwt) {
-            auth
-                .checkToken(jwt)
-                .then((res) => {
-                    setLoggedIn(true);
-                    setUserEmail(res.data.email);
-                    history.push("/")
-                })
-                .catch((err) => {
-                    console.log(`Ошибка: ${err}`);
-                })
+            return;
         }
+        auth
+            .checkToken(jwt)
+            .then((data) => {
+                setUserEmail(data.email);
+                setCurrentUser(data);
+                setLoggedIn(true);
+                history.push("/")
+            })
+            .catch((err) => console.log(err));
+        api
+            .getInitialCards(jwt)
+            .then((initialCards) => {
+                setCards(initialCards)
+            })
+            .catch((err) => console.log(err));
     }
 
     useEffect(() => {
         tokenCheck()
-    }, []);
+    }, [loggedIn]);
 
     useEffect(() => {
         if (loggedIn) {

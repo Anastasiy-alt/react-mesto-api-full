@@ -11,10 +11,13 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
-    getInitialCards() {
+    getInitialCards(jwt) {
         return fetch(`${this._baseUrl}/cards`, {
             credentials: 'include',
-            headers: this._headers,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`,
+              },
             method: 'GET'
         })
             .then(res => this._check(res))
