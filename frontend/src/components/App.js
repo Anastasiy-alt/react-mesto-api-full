@@ -42,6 +42,7 @@ function App() {
         auth
             .checkToken(jwt)
             .then((data) => {
+                setUserEmail(data.email);
                 setCurrentUser(data);
                 setLoggedIn(true);
                 history.push("/")
@@ -118,7 +119,7 @@ function App() {
             .then((data) => {
                 if (data) {
                     setLoggedIn(true)
-                    localStorage.setItem('jwt', data.token);
+                    localStorage.setItem('token', data.token);
                     setUserEmail(email);
                     history.push("/");
                     tokenCheck();
