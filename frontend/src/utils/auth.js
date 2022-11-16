@@ -35,22 +35,6 @@ export const checkToken = () => {
         credentials: 'include'
     })
         .then(Api._check)
-        .then(res => res.json())
-        .then(data => data)
+        // .then(res => res.json())
+        // .then(data => data)
 }
-
-export function checkCookieWithToken() {
-    return fetch(`${BASE_URL}/checkCookie`, {
-      method: 'GET',
-      credentials: 'include'
-    })
-    .then(Api._check)
-  }
-
-  export function logOut () {
-    return fetch(`${BASE_URL}/signout`, {
-      method: 'GET',
-      credentials: 'include'
-    })
-    .then(Api._check)
-  }
