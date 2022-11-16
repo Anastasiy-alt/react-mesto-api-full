@@ -14,6 +14,7 @@ class Api {
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
+            credentials: 'include',
             headers: this._headers,
             method: 'GET'
         })
@@ -22,6 +23,7 @@ class Api {
 
     addInitialCards(cardData) {
         return fetch(`${this._baseUrl}/cards`, {
+            credentials: 'include',
             headers: this._headers,
             method: 'POST',
             body: JSON.stringify({
@@ -34,6 +36,7 @@ class Api {
     }
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
+            credentials: 'include',
             headers: this._headers,
             method: 'GET'
         })
@@ -42,6 +45,7 @@ class Api {
 
     setUserInfo(userData) {
         return fetch(`${this._baseUrl}/users/me`, {
+            credentials: 'include',
             headers: this._headers,
             method: 'PATCH',
             body: JSON.stringify({
@@ -54,6 +58,7 @@ class Api {
 
     addCard(cardData) {
         return fetch(`${this._baseUrl}/cards`, {
+            credentials: 'include',
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -66,6 +71,7 @@ class Api {
 
     setUserAvatar(userData) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
+            credentials: 'include',
             headers: this._headers,
             method: 'PATCH',
             body: JSON.stringify({
@@ -77,6 +83,7 @@ class Api {
 
     deleteCard(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`, {
+            credentials: 'include',
             method: 'DELETE',
             headers: this._headers,
         })
@@ -85,6 +92,7 @@ class Api {
 
     putLike(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+            credentials: 'include',
             method: 'PUT',
             headers: this._headers,
         })
@@ -93,6 +101,7 @@ class Api {
 
     deleteLike(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+            credentials: 'include',
             method: 'DELETE',
             headers: this._headers,
         })
@@ -110,9 +119,9 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-46',
+    baseUrl: 'http://api.mesto.pilot.nomoredomains.icu',
     headers: {
-        authorization: '4ab555e1-39a0-48e6-8593-6e8a4a84e28f',
+        // authorization: '4ab555e1-39a0-48e6-8593-6e8a4a84e28f',
         'Content-Type': 'application/json'
     }
 });

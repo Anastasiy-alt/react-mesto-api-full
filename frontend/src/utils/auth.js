@@ -8,7 +8,8 @@ export const register = (email, password) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
     })
         .then(Api._check)
 };
@@ -20,7 +21,8 @@ export const authorize = (email, password) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
     })
         .then(Api._check)
 };
@@ -32,7 +34,8 @@ export const checkToken = (token) => {
             'Accept': 'application/json',
             'Content-Type': "application/json",
             'Authorization': `Bearer ${token}`
-        }
+        },
+        credentials: 'include'
     })
         .then(Api._check)
         .then(res => res.json())
