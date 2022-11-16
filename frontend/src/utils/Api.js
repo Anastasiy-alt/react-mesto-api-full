@@ -8,7 +8,6 @@ class Api {
         if (res.ok) {
             return res.json();
         }
-        // если ошибка, отклоняем промис
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
@@ -34,6 +33,7 @@ class Api {
             .then(res => this._check(res))
 
     }
+
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             credentials: 'include',
@@ -122,7 +122,8 @@ class Api {
 const api = new Api({
     baseUrl: 'https://api.mesto.pilot.nomoredomains.icu',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
     }
 });
 

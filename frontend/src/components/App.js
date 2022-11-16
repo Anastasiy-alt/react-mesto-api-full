@@ -20,61 +20,25 @@ require('dotenv').config();
 
 function App() {
     const history = useHistory();
+
     const [loggedIn, setLoggedIn] = useState(false);
     const [userEmail, setUserEmail] = useState("");
     const [isSuccess, setIsSuccess] = useState(false);
     const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
-
-    function handleLogin(email, password) {
-        return auth
-            .authorize(email, password)
-            .then((data) => {
-                if (data) {
-                    setLoggedIn(true)
-                    localStorage.setItem('jwt', data.token);
-                    setUserEmail(email);
-                    history.push("/");
-                }
-            })
-            .catch((err) => {
-                setIsSuccess(false);
-                setIsInfoTooltipPopupOpen(true);
-                console.log(`Ошибка: ${err}`);
-            })
-    }
-
-    function handleRegister(email, password) {
-        return auth
-            .register(email, password)
-            .then(() => {
-                setIsSuccess(true);
-                setIsInfoTooltipPopupOpen(true);
-                history.push("/sign-in");
-            })
-            .catch((err) => {
-                setIsSuccess(false);
-                setIsInfoTooltipPopupOpen(true);
-                console.log(`Ошибка: ${err}`);
-            })
-    }
-
-    const [currentUser, setCurrentUser] = useState({});
-
     const [cards, setCards] = useState([]);
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState({});
-    // const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
     const [selectDelete, setSelectDelete] = useState(false);
     const [deleteCard, setDeleteCard] = useState('');
 
+ 
+
     const tokenCheck = () => {
-        // если у пользователя есть токен в localStorage,
-        // эта функция проверит валидность токена 
         const jwt = localStorage.getItem('jwt');
         if (jwt) {
-            // проверим токен
             auth
                 .checkToken(jwt)
                 .then((res) => {
@@ -142,6 +106,37 @@ function App() {
             })
     };
 
+    function handleLogin(email, password) {
+        return auth
+            .authorize(email, password)
+            .then((data) => {
+                if (data) {
+                    setLoggedIn(true)
+                    localStorage.setItem('jwt', data.token);
+                    setUserEmail(email);
+                    history.push("/");
+                }
+            })
+            .catch((err) => {
+                setIsSuccess(false);
+                setIsInfoTooltipPopupOpen(true);
+                console.log(`Ошибка: ${err}`);
+            })
+    }
+    function handleRegister(email, password) {
+        return auth
+            .register(email, password)
+            .then(() => {
+                setIsSuccess(true);
+                setIsInfoTooltipPopupOpen(true);
+                history.push("/sign-in");
+            })
+            .catch((err) => {
+                setIsSuccess(false);
+                setIsInfoTooltipPopupOpen(true);
+                console.log(`Ошибка: ${err}`);
+            })
+    }
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
         api.changeLikeCardStatus(card._id, !isLiked)
