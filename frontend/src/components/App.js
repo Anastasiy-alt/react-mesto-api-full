@@ -74,9 +74,6 @@ function App() {
     }, [loggedIn])
 
     const handleSignOut = () => {
-        // logoutAPI();
-        // setCurrentUser({});
-        // history.push('/sign-in');
         setLoggedIn(false);
         localStorage.removeItem('jwt');
         history.push("/sign-in");
@@ -119,7 +116,7 @@ function App() {
             .then((data) => {
                 if (data) {
                     setLoggedIn(true)
-                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('jwt', data.token);
                     setUserEmail(email);
                     history.push("/");
                     tokenCheck();
