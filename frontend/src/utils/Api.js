@@ -124,6 +124,7 @@ const api = new Api({
     baseUrl: 'https://api.mesto.pilot.nomoredomains.icu',
     headers: {
         'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
     }
 });
 

@@ -42,6 +42,5 @@
     "fs": false,
     "path": false,
     "os": false
-  },
-  "proxy": "http://localhost:3000"
+  }
 }
