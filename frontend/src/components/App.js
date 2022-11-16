@@ -38,17 +38,6 @@ function App() {
 
     function tokenCheck() {
         checkCookieWithToken()
-            .then((res) => {
-                return res.text();
-            })
-            .then(text => {
-                if (text === 'false') {
-                    return false
-                }
-                if (text === 'true') {
-                    return true
-                }
-            })
             .then(res => {
                 if (res) {
                     checkToken()
