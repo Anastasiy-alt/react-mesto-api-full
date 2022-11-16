@@ -16,7 +16,7 @@ import Login from './Login';
 import InfoTooltip from './InfoTooltip';
 import * as auth from '../utils/auth';
 import '../index.css';
-import checkToken from '../utils/auth';
+import { checkToken, logOut, checkCookieWithToken } from '../utils/Auth';
 require('dotenv').config();
 
 function App() {
@@ -36,32 +36,57 @@ function App() {
     const [deleteCard, setDeleteCard] = useState('');
 
 
-
-    const tokenCheck = () => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-            return;
-        }
-        auth
-            .checkToken(jwt)
-            .then((data) => {
-                setUserEmail(data.email);
-                setCurrentUser(data);
-                setLoggedIn(true);
-                history.push("/")
+    function tokenCheck() {
+        checkCookieWithToken()
+            .then((res) => {
+                return res.text();
             })
-            .catch((err) => console.log(err));
-        api
-            .getInitialCards(jwt)
-            .then((initialCards) => {
-                setCards(initialCards)
+            .then(text => {
+                if (text === 'false') {
+                    return false
+                }
+                if (text === 'true') {
+                    return true
+                }
             })
-            .catch((err) => console.log(err));
+            .then(res => {
+                if (res) {
+                    checkToken()
+                        .then((res) => {
+                            setUserEmail(res.email);
+                            setLoggedIn('true');
+                            history.push('/');
+                        })
+                        .catch((err) => console.log(err));
+                }
+            })
     }
+
+    // const tokenCheck = () => {
+    //     const jwt = localStorage.getItem('jwt');
+    //     if (jwt) {
+    //         return;
+    //     }
+    //     auth
+    //         .checkToken(jwt)
+    //         .then((data) => {
+    //             setUserEmail(data.email);
+    //             setCurrentUser(data);
+    //             setLoggedIn(true);
+    //             history.push("/")
+    //         })
+    //         .catch((err) => console.log(err));
+    //     api
+    //         .getInitialCards(jwt)
+    //         .then((initialCards) => {
+    //             setCards(initialCards)
+    //         })
+    //         .catch((err) => console.log(err));
+    // }
 
     useEffect(() => {
         tokenCheck()
-    }, [loggedIn]);
+    }, []);
 
     useEffect(() => {
         if (loggedIn) {
@@ -77,6 +102,9 @@ function App() {
     }, [loggedIn])
 
     const handleSignOut = () => {
+        // logoutAPI();
+        // setCurrentUser({});
+        // history.push('/sign-in');
         setLoggedIn(false);
         localStorage.removeItem('jwt');
         history.push("/sign-in");

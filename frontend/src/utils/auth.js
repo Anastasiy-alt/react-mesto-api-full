@@ -26,13 +26,11 @@ export const authorize = (email, password) => {
         .then(Api._check)
 };
 
-export const checkToken = (token) => {
+export const checkToken = () => {
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         headers: {
-            // 'Accept': 'application/json',
             'Content-Type': "application/json",
-            // 'Authorization': `Bearer ${token}`
         },
         credentials: 'include'
     })
@@ -40,3 +38,19 @@ export const checkToken = (token) => {
         .then(res => res.json())
         .then(data => data)
 }
+
+export function checkCookieWithToken() {
+    return fetch(`${BASE_URL}/checkCookie`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+    .then(Api._check)
+  }
+
+  export function logOut () {
+    return fetch(`${BASE_URL}/signout`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+    .then(Api._check)
+  }

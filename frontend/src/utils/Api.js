@@ -11,7 +11,7 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
-    getInitialCards(jwt) {
+    getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             credentials: 'include',
             headers: this._headers,
