@@ -14,10 +14,8 @@ class Api {
     getInitialCards(jwt) {
         return fetch(`${this._baseUrl}/cards`, {
             credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${jwt}`,
-              },
+            headers: this._headers,
+
             method: 'GET'
         })
             .then(res => this._check(res))
@@ -126,7 +124,7 @@ const api = new Api({
     baseUrl: 'https://api.mesto.pilot.nomoredomains.icu',
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        // 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
     }
 });
 
