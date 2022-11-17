@@ -8,15 +8,13 @@ const handleAuthError = (next) => {
   next(new UnauthorizedError('Необходима авторизация.'));
 };
 
-const extractBearerToken = (header) => header.replace('Bearer ', '');
+// const extractBearerToken = (header) => header.replace('Bearer ', '');
 
 module.exports = (req, res, next) => {
-  const { authorization } = req.headers;
-
-  if (!authorization || !authorization.startsWith('Bearer ')) {
+  const { token } = req.cookies;
+  if (!token) {
     return handleAuthError(next);
   }
-  const token = extractBearerToken(authorization);
   let payload;
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
