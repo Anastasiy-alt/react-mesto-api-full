@@ -18,8 +18,9 @@ module.exports = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', origin);
   }
   if (method === 'OPTIONS') {
+    const allowHeaders = `${requestHeaders}, 'Set-Cookie'`;
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
+    res.header('Access-Control-Allow-Headers', allowHeaders);
     res.end();
   }
   next();
