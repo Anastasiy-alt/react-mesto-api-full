@@ -11,7 +11,6 @@ const handleAuthError = (next) => {
 // const extractBearerToken = (header) => header.replace('Bearer ', '');
 
 module.exports = (req, res, next) => {
-  console.dir(req);
   const { token } = req.cookies;
   if (!token) {
     return handleAuthError(next);
