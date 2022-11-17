@@ -1,14 +1,14 @@
 class Api {
-    constructor({ baseUrl, headers }) {
-        this._baseUrl = baseUrl;
-        this._headers = headers;
+    constructor(option) {
+        this._baseUrl = option.baseUrl;
+        this._headers = option.headers;
     }
 
     _check(res) {
         if (res.ok) {
             return res.json();
         }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return Promise.reject(`Ошибка: ${res.status} ${this._baseUrl}`);
     }
 
     getInitialCards() {
