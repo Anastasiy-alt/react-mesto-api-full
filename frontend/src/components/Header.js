@@ -1,10 +1,10 @@
-import logo from '../images/Vector-2.svg';
+import { logo } from '../images/Vector-2.svg';
 import { Link, Switch, Route } from 'react-router-dom';
 
 function Header({ userEmail, onSignOut, loggedIn }) {
     return (
         <header className="header">
-            <img src="https://images.unsplash.com/photo-1513297887119-d46091b24bfa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Место." className="header__logo" />
+            <img src='../images/Vector-2.svg' alt="Место." className="header__logo" />
             {loggedIn ? (
                 <div className="header__auth">
                     <p className="header__email">{userEmail}</p>
