@@ -8,8 +8,6 @@ const handleAuthError = (next) => {
   next(new UnauthorizedError('Необходима авторизация.'));
 };
 
-// const extractBearerToken = (header) => header.replace('Bearer ', '');
-
 module.exports = (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {

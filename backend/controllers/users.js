@@ -4,6 +4,7 @@ const User = require('../models/users');
 const ConflictError = require('../errors/ConflictError');
 const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
+require('dotenv').config();
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
