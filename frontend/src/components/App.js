@@ -35,12 +35,12 @@ function App() {
     const [deleteCard, setDeleteCard] = useState('');
 
     const tokenCheck = () => {
-        const token = localStorage.getItem('token');
-        if (token) {
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
             return;
         }
         auth
-            .checkToken(token)
+            .checkToken(jwt)
             .then((data) => {
                 setUserEmail(data.email);
                 setCurrentUser(data);
@@ -49,7 +49,7 @@ function App() {
             })
             .catch((err) => console.log(err));
         api
-            .getInitialCards(token)
+            .getInitialCards(jwt)
             .then((initialCards) => {
                 setCards(initialCards)
             })
@@ -75,7 +75,7 @@ function App() {
 
     const handleSignOut = () => {
         setLoggedIn(false);
-        localStorage.removeItem('token');
+        localStorage.removeItem('jwt');
         history.push("/sign-in");
     }
 
@@ -116,7 +116,7 @@ function App() {
             .then((data) => {
                 if (data) {
                     setLoggedIn(true)
-                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('jwt', data.token);
                     setUserEmail(email);
                     history.push("/");
                     tokenCheck();
