@@ -96,18 +96,19 @@ module.exports.login = (req, res, next) => {
       );
       res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'none',
-        secure: true,
+        // sameSite: 'none',
+        // secure: true,
       });
-      res.send({
-        data: {
-          name: user.name,
-          avatar: user.avatar,
-          about: user.about,
-          email: user.email,
-          _id: user._id,
-        },
-      });
+      return res.send({ token });
+      // res.send({
+      //   data: {
+      //     name: user.name,
+      //     avatar: user.avatar,
+      //     about: user.about,
+      //     email: user.email,
+      //     _id: user._id,
+      //   },
+      // });
     })
     .catch(next);
 };
