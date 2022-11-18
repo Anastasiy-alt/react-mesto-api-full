@@ -8,17 +8,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Мурзик',
+    default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Исследователь ёлок',
+    default: 'Исследователь',
   },
   avatar: {
     type: String,
-    default: 'https://images.unsplash.com/photo-1640106469409-bd38bb2d16ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
     validate: {
       validator: (url) => validator.isURL(url),
       message: 'Неправильный формат ссылки.',
