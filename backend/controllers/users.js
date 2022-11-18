@@ -42,7 +42,7 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.getUserId = (req, res, next) => {
-  User.findById(req.params.userId)
+  User.findById(req.params)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Нет пользователя с таким id');
@@ -59,7 +59,7 @@ module.exports.updateProfile = (req, res, next) => {
     { name, about },
     { new: true, runValidators: true },
   )
-    .then((user) => res.send({ user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные при создании карточки.'));
@@ -75,7 +75,7 @@ module.exports.updateAvatar = (req, res, next) => {
     { avatar },
     { new: true, runValidators: true },
   )
-    .then((user) => res.send({ user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные при создании карточки.'));
@@ -95,6 +95,7 @@ module.exports.login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       res.cookie('token', token, {
+        maxAge: 3600000,
         httpOnly: true,
         sameSite: 'none',
         secure: true,
@@ -121,7 +122,7 @@ module.exports.logout = (req, res) => {
 };
 
 module.exports.getUserMe = (req, res, next) => {
-  const { _id } = req.user;
+  const { _id } = req.user._id;
   User
     .findById(_id)
     .then((user) => {
