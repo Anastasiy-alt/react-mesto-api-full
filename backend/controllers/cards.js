@@ -60,19 +60,11 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(cardId)
     .orFail(() => new NotFoundError('Нет карточки по заданному id.'))
     .then((card) => {
-      if (card.owner.toString() !== req.user._id) {
-        return next(new ForbiddenError('Нет прав для выполнения этого действия'));
+      if (!card.owner.equals(req.user._id)) {
+        return next(new ForbiddenError('Нельзя удалить чужую карточку.'));
       }
-
-      return Card.findByIdAndRemove(cardId)
-        .then((deletedCard) => res.send(deletedCard));
+      return card.remove()
+        .then(() => res.send({ message: 'Карточка удалена.' }));
     })
-    // .then((card) => {
-    //   if (!card.owner.equals(req.user._id)) {
-    //     return next(new ForbiddenError('Нельзя удалить чужую карточку.'));
-    //   }
-    //   return card.remove()
-    //     .then(() => res.send({ message: 'Карточка удалена.' }));
-    // })
     .catch(next);
 };
