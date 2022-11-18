@@ -7,8 +7,16 @@ class Api {
     _check(res) {
         if (res.ok) {
             return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status} ${this._baseUrl}`);
+          }
+          return res.json()
+            .then((err) => {
+            err.statusCode = res.status; 
+            return Promise.reject(err);
+           })
+        // if (res.ok) {
+        //     return res.json();
+        // }
+        // return Promise.reject(`Ошибка: ${res.status} ${this._baseUrl}`);
     }
 
     getInitialCards() {
