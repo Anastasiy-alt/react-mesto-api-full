@@ -3,7 +3,6 @@ import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, button, onAddCard }) {
 
-
     const [title, setTitle] = useState([]);
     const [link, setLink] = useState([]);
 

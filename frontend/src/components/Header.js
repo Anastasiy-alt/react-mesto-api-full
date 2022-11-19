@@ -1,11 +1,9 @@
 import logo from '../images/Vector-2.svg';
-// import { ReactComponent as Logo } from '../images/Vector-2.svg';
 import { Link, Switch, Route } from 'react-router-dom';
 
 function Header({ userEmail, onSignOut, loggedIn }) {
     return (
         <header className="header">
-            {/* <Logo alt="Место" className="header__logo"></Logo> */}
             <img src={logo} alt="Место." className="header__logo" />
             {loggedIn ? (
                 <div className="header__auth">
