@@ -21,11 +21,11 @@ module.exports.createUser = (req, res, next) => {
 
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
-      email: req.body.user.email,
+      email: req.body.email,
       password: hash,
-      name: req.body.user.name,
-      about: req.body.user.about,
-      avatar: req.body.user.avatar, // записываем хеш в базу
+      name: req.body.name,
+      about: req.body.about,
+      avatar: req.body.avatar, // записываем хеш в базу
     }))
     .then(() => res.send({
       name, about, avatar, email,
@@ -59,7 +59,7 @@ module.exports.updateProfile = (req, res, next) => {
     { name, about },
     { new: true, runValidators: true },
   )
-    .then((user) => res.send({ user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные при создании карточки.'));
@@ -75,7 +75,7 @@ module.exports.updateAvatar = (req, res, next) => {
     { avatar },
     { new: true, runValidators: true },
   )
-    .then((user) => res.send({ user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные при создании карточки.'));
