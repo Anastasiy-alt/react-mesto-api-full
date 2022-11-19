@@ -78,7 +78,7 @@ function App() {
         history.push("/sign-in");
     }
 
-    const handleUpdateUser = (userData) => {
+    const handleUpdateUser = ({userData}) => {
         api.setUserInfo(userData)
             .then((data) => {
                 setCurrentUser(data);
@@ -98,7 +98,7 @@ function App() {
                 console.log(`Ошибка: ${err}`);
             })
     };
-    const handleUpdateAvatar = (avatar) => {
+    const handleUpdateAvatar = ({avatar}) => {
         api.setUserAvatar(avatar)
             .then((data) => {
                 setCurrentUser(data);
