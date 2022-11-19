@@ -80,7 +80,7 @@ function App() {
 
     const handleUpdateUser = (userInfo) => {
         api.setUserInfo(userInfo)
-            .then((data) => {
+            .then(({ data }) => {
                 setCurrentUser(state => ({ ...state, ...data }));
                 closeAllPopups();
             })
@@ -100,7 +100,7 @@ function App() {
     };
     const handleUpdateAvatar = (avatar) => {
         api.setUserAvatar(avatar)
-            .then((data) => {
+            .then(({ data }) => {
                 setCurrentUser(state => ({ ...state, ...data }));
                 closeAllPopups();
             })
