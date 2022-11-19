@@ -90,8 +90,8 @@ function App() {
     };
     const handleAddCard = (card) => {
         api.addCard(card)
-            .then((newCard) => {
-                setCards([newCard, ...cards]);
+            .then(({ data }) => {
+                setCards([data, ...cards]);
                 closeAllPopups();
             })
             .catch((err) => {
@@ -100,7 +100,7 @@ function App() {
     };
     const handleUpdateAvatar = (avatar) => {
         api.setUserAvatar(avatar)
-            .then((data) => {
+            .then(({ data }) => {
                 setCurrentUser(data);
                 closeAllPopups();
             })
