@@ -78,10 +78,10 @@ function App() {
         history.push("/sign-in");
     }
 
-    const handleUpdateUser = ({name, about}) => {
-        api.setUserInfo(name, about)
-            .then((name, about) => {
-                setCurrentUser(name, about);
+    const handleUpdateUser = (userInfo) => {
+        api.setUserInfo(userInfo)
+            .then(({ data }) => {
+                setCurrentUser(data);
                 closeAllPopups();
             })
             .catch((error) => {
@@ -98,9 +98,9 @@ function App() {
                 console.log(`Ошибка: ${err}`);
             })
     };
-    const handleUpdateAvatar = ({avatar}) => {
+    const handleUpdateAvatar = (avatar) => {
         api.setUserAvatar(avatar)
-            .then((data) => {
+            .then(({ data }) => {
                 setCurrentUser(data);
                 closeAllPopups();
             })
