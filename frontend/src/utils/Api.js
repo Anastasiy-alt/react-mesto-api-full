@@ -52,14 +52,14 @@ class Api {
             .then(res => this._check(res))
     }
 
-    setUserInfo(userData) {
+    setUserInfo(name, about) {
         return fetch(`${this._baseUrl}/users/me`, {
             credentials: 'include',
             headers: this._headers,
             method: 'PATCH',
             body: JSON.stringify({
-                name: userData.name,
-                about: userData.about
+                name: name,
+                about: about
             })
         })
             .then(res => this._check(res))
