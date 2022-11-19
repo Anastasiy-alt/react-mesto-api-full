@@ -6,7 +6,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, button }) {
     const currentUser = useContext(CurrentUserContext);
     const [name, setName] = useState(currentUser.name);
     const [description, setDescription] = useState(currentUser.description);
-    console.dir(currentUser);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         onUpdateUser({

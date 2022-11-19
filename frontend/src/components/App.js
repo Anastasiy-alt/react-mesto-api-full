@@ -78,8 +78,8 @@ function App() {
         history.push("/sign-in");
     }
 
-    const handleUpdateUser = (userInfo) => {
-        api.setUserInfo(userInfo)
+    const handleUpdateUser = (userData) => {
+        api.setUserInfo(userData)
             .then((data) => {
                 setCurrentUser(data);
                 closeAllPopups();
@@ -101,7 +101,7 @@ function App() {
     const handleUpdateAvatar = (avatar) => {
         api.setUserAvatar(avatar)
             .then((data) => {
-                setCurrentUser({data});
+                setCurrentUser(data);
                 closeAllPopups();
             })
             .catch((err) => {
