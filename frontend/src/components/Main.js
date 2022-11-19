@@ -29,8 +29,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteCl
                         onCardClick={onCardClick}
                         onCardLike={onCardLike}
                         onCardDelete={onDeleteClick} />
-                )
-                .reverse())}
+                )).reverse()}
             </section>
         </Fragment>
     )
