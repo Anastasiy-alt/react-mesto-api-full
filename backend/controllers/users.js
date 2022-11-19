@@ -21,11 +21,11 @@ module.exports.createUser = (req, res, next) => {
 
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
-      email: req.body.email,
+      email: req.body.user.email,
       password: hash,
-      name: req.body.name,
-      about: req.body.about,
-      avatar: req.body.avatar, // записываем хеш в базу
+      name: req.body.user.name,
+      about: req.body.user.about,
+      avatar: req.body.user.avatar, // записываем хеш в базу
     }))
     .then(() => res.send({
       name, about, avatar, email,

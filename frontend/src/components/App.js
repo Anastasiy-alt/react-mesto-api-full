@@ -78,7 +78,7 @@ function App() {
         history.push("/sign-in");
     }
 
-    const handleUpdateUser = ({userData}) => {
+    const handleUpdateUser = (userData) => {
         api.setUserInfo(userData)
             .then((data) => {
                 setCurrentUser(data);
