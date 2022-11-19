@@ -13,10 +13,6 @@ class Api {
             err.statusCode = res.status; 
             return Promise.reject(err);
            })
-        // if (res.ok) {
-        //     return res.json();
-        // }
-        // return Promise.reject(`Ошибка: ${res.status} ${this._baseUrl}`);
     }
 
     getInitialCards() {
@@ -78,13 +74,13 @@ class Api {
             .then(res => this._check(res));
     }
 
-    setUserAvatar(userData) {
+    setUserAvatar(avatar) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             credentials: 'include',
             headers: this._headers,
             method: 'PATCH',
             body: JSON.stringify({
-                avatar: userData.avatar
+                avatar: avatar
             })
         })
             .then(res => this._check(res))
@@ -132,7 +128,6 @@ const api = new Api({
     baseUrl: 'https://api.mesto.pilot.nomoredomains.icu',
     headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
     }
 });
 
